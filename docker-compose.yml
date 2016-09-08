@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+  mongodb:
+    build: ./mongodb/.
+    hostname: mongo
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    networks: 
+      - connector
+  zeppelin:
+    build: ./zeppelin/.
+    hostname: zeppelin
+    expose:
+      - 8080
+      - 8081
+    links:
+      - mongodb:mongodb.host
+    ports:
+      - 8080:8080
+    networks: 
+      - connector
+
+networks:
+  connector:
