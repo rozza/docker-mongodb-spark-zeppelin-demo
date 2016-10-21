@@ -1,0 +1,909 @@
+﻿{
+    "paragraphs": [
+        {
+            "text": "%md \n## Setup\n\n 1. First configure the Interpreters.\n 2. Add the MongoDB Spark Connector to the Spark Interpreter `org.mongodb.spark:mongo-spark-connector_2.11:2.0.0-rc1`\n 3. Profit!",
+            "dateUpdated": "2016-10-21T16:26:46+0000",
+            "config": {
+                "colWidth": 12,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true,
+                "editorMode": "ace/mode/markdown",
+                "editorHide": true,
+                "tableHide": false
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1477041252084_-1575899171",
+            "id": "20161021-091412_1850124205",
+            "result": {
+                "code": "SUCCESS",
+                "type": "HTML",
+                "msg": "<h2>Setup</h2>\n<ol>\n<li>First configure the Interpreters.</li>\n<li>Add the MongoDB Spark Connector to the Spark Interpreter <code>org.mongodb.spark:mongo-spark-connector_2.11:2.0.0-rc1</code></li>\n<li>Profit!</li>\n</ol>\n"
+            },
+            "dateCreated": "2016-10-21T09:14:12+0000",
+            "dateStarted": "2016-10-21T16:26:47+0000",
+            "dateFinished": "2016-10-21T16:26:47+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3259",
+            "focus": true
+        },
+        {
+            "text": "%md\n## Using MongoDB And Spark to calculate the shortest route between Europes largest cities.\n\nCongratulations, you've won the EuroMillions lottery! To celebrate you want to travel to Europes largest 50 cities! The *nouveau riche* only have one way to travel; in style by personal helicopter! However, remembering your humble beginnings you want to ensure your carbon footprint is kept to a minimum. So you want to travel the **shortest route possible between cities**.\n\nIt’s a logistical nightmare. Working out the shortest round trip between a fixed number of points is a well-studied and notoriously difficult mathematical problem, usually called the Travelling Salesman Problem, or TSP.\n\nThe difficulty arises from the number of possible tours. With, say, 50 places to visit, there are 49 x 48 x 47 x … x 3 x 2 x 1 ways to travel between them. This number is 63 digits long:\n\n**608,281,864,034,267,560,872,252,163,321,295,376,887,552,831,379,210,240,000,000,000**\n\nIt’s absurdly big. Humungous! So, just say we wanted to find the shortest route between the 50 cities, how would might we do it?",
+            "dateUpdated": "2016-10-21T16:26:49+0000",
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/markdown",
+                "editorHide": true,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true,
+                "tableHide": false
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173567_1186178029",
+            "id": "20161017-123523_122921860",
+            "result": {
+                "code": "SUCCESS",
+                "type": "HTML",
+                "msg": "<h2>Using MongoDB And Spark to calculate the shortest route between Europes largest cities.</h2>\n<p>Congratulations, you've won the EuroMillions lottery! To celebrate you want to travel to Europes largest 50 cities! The <em>nouveau riche</em> only have one way to travel; in style by personal helicopter! However, remembering your humble beginnings you want to ensure your carbon footprint is kept to a minimum. So you want to travel the <strong>shortest route possible between cities</strong>.</p>\n<p>It’s a logistical nightmare. Working out the shortest round trip between a fixed number of points is a well-studied and notoriously difficult mathematical problem, usually called the Travelling Salesman Problem, or TSP.</p>\n<p>The difficulty arises from the number of possible tours. With, say, 50 places to visit, there are 49 x 48 x 47 x … x 3 x 2 x 1 ways to travel between them. This number is 63 digits long:</p>\n<p><strong>608,281,864,034,267,560,872,252,163,321,295,376,887,552,831,379,210,240,000,000,000</strong></p>\n<p>It’s absurdly big. Humungous! So, just say we wanted to find the shortest route between the 50 cities, how would might we do it?</p>\n"
+            },
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T16:26:50+0000",
+            "dateFinished": "2016-10-21T16:26:50+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3260",
+            "focus": true
+        },
+        {
+            "text": "%angular\n<!-- place this in an %angular paragraph -->\n\n<h2>Europes largest 50 cities</h3>\n<link rel=\"stylesheet\" href=\"https://unpkg.com/leaflet@1.0.1/dist/leaflet.css\" />\n<div id=\"map\" style=\"height: 500px; width: 100%\"></div>\n\n<script type=\"text/javascript\">\nfunction initMap() {\n    var map = L.map('map', { zoomControl:false, scrollWheelZoom: false, dragging: false}).setView([49.83798, 9.84375], 4);\n    var Esri_WorldStreetMap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {\n  \tattribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'\n   });\n   Esri_WorldStreetMap.addTo(map);\n\n    var geoMarkers = L.featureGroup().addTo(map);\n    var el = angular.element($('#map').parent('.ng-scope'));\n    angular.element(el).ready(function() {\n        window.locationWatcher = el.scope().compiledScope.$watch('locations', function(newValue, oldValue) {\n            geoMarkers.clearLayers(); // -- if you want to only show new data clear the layer first\n            locations = newValue\n            angular.forEach(newValue, function(city) {\n                var marker = L.marker([ city.lat,city.lon ])\n                  .bindPopup(city.name)\n                  .addTo(geoMarkers);\n            });\n            map.fitBounds(geoMarkers.getBounds());\n        })\n    });\n}\n\nif (window.locationWatcher) {\n    // clear existing watcher otherwise we'll have duplicates\n    window.locationWatcher();\n}\n\n// ensure we only load the script once, seems to cause issues otherwise\nif (window.L) {\n    initMap();\n} else {\n    console.log('Loading Leaflet library');\n    var sc = document.createElement('script');\n    sc.type = 'text/javascript';\n    sc.src = 'https://unpkg.com/leaflet@1.0.1/dist/leaflet.js';\n    sc.onload = initMap;\n    sc.onerror = function(err) { alert(err); }\n    document.getElementsByTagName('head')[0].appendChild(sc);\n}\n</script>",
+            "dateUpdated": "2016-10-21T16:26:54+0000",
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorHide": true,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [
+                        {
+                            "name": "_id",
+                            "index": 0,
+                            "aggr": "sum"
+                        }
+                    ],
+                    "values": [
+                        {
+                            "name": "address",
+                            "index": 1,
+                            "aggr": "sum"
+                        }
+                    ],
+                    "groups": [],
+                    "scatter": {
+                        "xAxis": {
+                            "name": "_id",
+                            "index": 0,
+                            "aggr": "sum"
+                        },
+                        "yAxis": {
+                            "name": "address",
+                            "index": 1,
+                            "aggr": "sum"
+                        }
+                    }
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173569_1270053289",
+            "id": "20161017-130840_2138461896",
+            "result": {
+                "code": "SUCCESS",
+                "type": "ANGULAR",
+                "msg": "<!-- place this in an %angular paragraph -->\n\n<h2>Europes largest 50 cities</h3>\n<link rel=\"stylesheet\" href=\"https://unpkg.com/leaflet@1.0.1/dist/leaflet.css\" />\n<div id=\"map\" style=\"height: 500px; width: 100%\"></div>\n\n<script type=\"text/javascript\">\nfunction initMap() {\n    var map = L.map('map', { zoomControl:false, scrollWheelZoom: false, dragging: false}).setView([49.83798, 9.84375], 4);\n    var Esri_WorldStreetMap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {\n  \tattribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'\n   });\n   Esri_WorldStreetMap.addTo(map);\n\n    var geoMarkers = L.featureGroup().addTo(map);\n    var el = angular.element($('#map').parent('.ng-scope'));\n    angular.element(el).ready(function() {\n        window.locationWatcher = el.scope().compiledScope.$watch('locations', function(newValue, oldValue) {\n            geoMarkers.clearLayers(); // -- if you want to only show new data clear the layer first\n            locations = newValue\n            angular.forEach(newValue, function(city) {\n                var marker = L.marker([ city.lat,city.lon ])\n                  .bindPopup(city.name)\n                  .addTo(geoMarkers);\n            });\n            map.fitBounds(geoMarkers.getBounds());\n        })\n    });\n}\n\nif (window.locationWatcher) {\n    // clear existing watcher otherwise we'll have duplicates\n    window.locationWatcher();\n}\n\n// ensure we only load the script once, seems to cause issues otherwise\nif (window.L) {\n    initMap();\n} else {\n    console.log('Loading Leaflet library');\n    var sc = document.createElement('script');\n    sc.type = 'text/javascript';\n    sc.src = 'https://unpkg.com/leaflet@1.0.1/dist/leaflet.js';\n    sc.onload = initMap;\n    sc.onerror = function(err) { alert(err); }\n    document.getElementsByTagName('head')[0].appendChild(sc);\n}\n</script>"
+            },
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T16:26:54+0000",
+            "dateFinished": "2016-10-21T16:26:54+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3261",
+            "focus": true
+        },
+        {
+            "title": "Europes largest 50 cities",
+            "text": "// Load the data\ncase class CityData(name: String, country: String, lat: Double, lon: Double)\nval cityData = sqlContext.read.json(\"/zeppelin/data/cities.json\").as[CityData]\ncityData.write.format(\"com.mongodb.spark.sql\").mode(\"overwrite\").option(\"uri\", \"mongodb://mongodb:27017/sparkDemo.tsp\").save()\nz.angularBind(\"locations\", cityData.limit(50).collect())\n\n// Utility helpers\nval scale  = (10 to 100 by 10).map(i => (s\"$i\", s\"$i\"))\ndef toInt(s: Object): Int = {\n  try {\n    s.toString.toInt\n  } catch {\n    case e: Exception => 0\n  }\n}\n\nimport scala.concurrent.duration.{Deadline, Duration}\ndef timed[R](block: => R): (R, Duration) = {\n  val start = Deadline.now\n  val result = block    // call-by-name\n  val end = Deadline.now\n  (result, end - start)\n}\n\ncase class RouteStats(cities: Int, partitions: Int, populationSize: Int, maxGeneration: Int, maxSimilarity: Double, elitism: Double, seconds: Long, distance: Int)\nval runs = scala.collection.mutable.ListBuffer[RouteStats]()\n",
+            "dateUpdated": "2016-10-21T16:27:03+0000",
+            "config": {
+                "tableHide": true,
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorHide": true,
+                "title": false,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173570_1271207535",
+            "id": "20161017-124006_843465665",
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T15:16:36+0000",
+            "dateFinished": "2016-10-21T15:17:01+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3262",
+            "errorMessage": ""
+        },
+        {
+            "title": "Basic Configuration",
+            "text": "import com.mongodb.spark._\nimport com.mongodb.spark.config._\n\nval readConfig = ReadConfig(Map(\"uri\" -> \"mongodb://mongodb:27017/sparkDemo.tsp\"))\n\nimport org.apache.spark.sql.SparkSession\nval spark = SparkSession.builder().getOrCreate()",
+            "dateUpdated": "2016-10-21T15:16:36+0000",
+            "config": {
+                "tableHide": true,
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "title": true,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173570_1271207535",
+            "id": "20161017-125743_1000657803",
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T15:16:38+0000",
+            "dateFinished": "2016-10-21T15:17:02+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3263",
+            "errorMessage": ""
+        },
+        {
+            "title": "Solving the shortest route",
+            "text": "%md\n## Solving the shortest route\n\nHere we'll use a **Genetic Algorithm** approach. At a basic level, the genetic algorthim works by generating random routes between cities, finding the best ones and then recombining and mutating these best ones to find even better ones. This is done in over a number of generations.\n\nThe first step is to define some basic data holding classes:\n\n```scala\ncase class City(name: String, country: String, lat: Double, lon: Double)\n```\nThe `City` class also has a companion object with some basic helper functions to calculate the straight line distance between cities. Along side the `City` we need to store a route through all the cities. The `Tour` class contains the path and a calculated distance:\n\n```scala\ncase class Tour(cities: Seq[City], path: Seq[Int], distance: Double)\n```\n\nNow the data holders are defined, we can look at how to calculate the shortest route through all the cities.",
+            "dateUpdated": "2016-10-21T16:27:21+0000",
+            "config": {
+                "tableHide": false,
+                "colWidth": 12,
+                "editorMode": "ace/mode/markdown",
+                "editorHide": true,
+                "title": false,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173570_1271207535",
+            "id": "20161017-135222_1679085230",
+            "result": {
+                "code": "SUCCESS",
+                "type": "HTML",
+                "msg": "<h2>Solving the shortest route</h2>\n<p>Here we'll use a <strong>Genetic Algorithm</strong> approach. At a basic level, the genetic algorthim works by generating random routes between cities, finding the best ones and then recombining and mutating these best ones to find even better ones. This is done in over a number of generations.</p>\n<p>The first step is to define some basic data holding classes:</p>\n<pre><code class=\"scala\">case class City(name: String, country: String, lat: Double, lon: Double)\n</code></pre>\n<p>The <code>City</code> class also has a companion object with some basic helper functions to calculate the straight line distance between cities. Along side the <code>City</code> we need to store a route through all the cities. The <code>Tour</code> class contains the path and a calculated distance:</p>\n<pre><code class=\"scala\">case class Tour(cities: Seq[City], path: Seq[Int], distance: Double)\n</code></pre>\n<p>Now the data holders are defined, we can look at how to calculate the shortest route through all the cities.</p>\n"
+            },
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T16:27:21+0000",
+            "dateFinished": "2016-10-21T16:27:21+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3264",
+            "focus": true
+        },
+        {
+            "text": "// Create a city class\ncase class City(name: String, country: String, lat: Double, lon: Double) {\n    \n  def distanceTo(that: City): Double = {\n    val theta = this.lon - that.lon\n    var dist = Math.sin(deg2rad(this.lat)) * Math.sin(deg2rad(that.lat)) +\n      Math.cos(deg2rad(this.lat)) * Math.cos(deg2rad(that.lat)) *\n        Math.cos(deg2rad(theta))\n    dist = Math.acos(dist)\n    dist = rad2deg(dist)\n    dist = dist * 60 * 1.1515\n    dist = dist * 1.609344\n    dist\n  }\n\n  private def deg2rad(deg: Double): Double = deg * Math.PI / 180.0\n  private def rad2deg(rad: Double): Double = rad * 180 / Math.PI\n}\n\n// Create a tour - a route between the cities\ncase class Tour(cities: Seq[City], path: Seq[Int], distance: Double)\n\n// Create a helper\nobject Tour {\n  import scala.util.Random\n  \n  def apply(cities: Seq[City]): Tour = {\n    val path = Random.shuffle(cities.indices.toList)\n    Tour(cities, path)\n  }\n\n  def apply(cities: Seq[City], path: Seq[Int]): Tour = {\n    val distance = path.zip(path.tail).map(i => cities(i._1).distanceTo(cities(i._2))).sum\n    new Tour(cities, path, distance)\n  }\n\n}",
+            "dateUpdated": "2016-10-21T15:16:36+0000",
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "tableHide": true,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173570_1271207535",
+            "id": "20161017-142516_456037281",
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T15:17:02+0000",
+            "dateFinished": "2016-10-21T15:17:03+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3265",
+            "errorMessage": ""
+        },
+        {
+            "text": "%md\n## Finding a Solution\n\nTo find the best path, I've created a `Solver` class. This class does all the work in finding the best route through the cities. \n\nThe `evolve` method does the real work by looping through the generations for each tour.\n\n```scala\ndef evolve(tours: Seq[Tour], maxGenerations: Int, maxSimilarity: Double, elitism: Double,  mutationRate: Double): Seq[Tour] = {\n\n    var currGeneration = tours\n    var bestGeneration = currGeneration\n    var (i, noImprovement) = (1, 0)\n    \n    // Go through each generation until all done or two generations in a row fail to improve the path\n    while (i < maxGenerations && noImprovement < 2) {\n      // Save the best of the last generation\n      val elites = currGeneration.take(Math.round(elitism * currGeneration.size).toInt)\n      \n      // Create new children and mutate the gene pool\n      val children = currGeneration.takeRight(currGeneration.size - elites.size)\n                        .map(tour => cross(tour, currGeneration, maxSimilarity))\n                        .map(t =>if (mutationRate == 1.0 || RANDOM.nextDouble() < mutationRate) mutate(t) else t)\n    \n      currGeneration = (elites ++ children).sortBy(_.distance)\n      \n      if (currGeneration.head.distance < bestGeneration.head.distance) {\n        bestGeneration = currGeneration\n      } else {\n        noImprovement += 1\n      }\n      i += 1\n    }\n    \n    // Make the tour circular\n    bestGeneration.map(t => Tour(t.cities, t.path :+ t.path.head))\n}\n\n```\n\nThe `fittest` method is a simple reduction and only selects the tour smallest path.\n\n```scala\ndef fittest(a: Tour, b: Tour): Tour = Seq(a, b).sortBy(_.distance).head\n```",
+            "dateUpdated": "2016-10-21T16:27:27+0000",
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/markdown",
+                "editorHide": true,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true,
+                "tableHide": false
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173571_1270822787",
+            "id": "20161018-133728_243386591",
+            "result": {
+                "code": "SUCCESS",
+                "type": "HTML",
+                "msg": "<h2>Finding a Solution</h2>\n<p>To find the best path, I've created a <code>Solver</code> class. This class does all the work in finding the best route through the cities.</p>\n<p>The <code>evolve</code> method does the real work by looping through the generations for each tour.</p>\n<pre><code class=\"scala\">def evolve(tours: Seq[Tour], maxGenerations: Int, maxSimilarity: Double, elitism: Double,  mutationRate: Double): Seq[Tour] = {\n\n    var currGeneration = tours\n    var bestGeneration = currGeneration\n    var (i, noImprovement) = (1, 0)\n\n    // Go through each generation until all done or two generations in a row fail to improve the path\n    while (i &lt; maxGenerations &amp;&amp; noImprovement &lt; 2) {\n      // Save the best of the last generation\n      val elites = currGeneration.take(Math.round(elitism * currGeneration.size).toInt)\n\n      // Create new children and mutate the gene pool\n      val children = currGeneration.takeRight(currGeneration.size - elites.size)\n                        .map(tour =&gt; cross(tour, currGeneration, maxSimilarity))\n                        .map(t =&gt;if (mutationRate == 1.0 || RANDOM.nextDouble() &lt; mutationRate) mutate(t) else t)\n\n      currGeneration = (elites ++ children).sortBy(_.distance)\n\n      if (currGeneration.head.distance &lt; bestGeneration.head.distance) {\n        bestGeneration = currGeneration\n      } else {\n        noImprovement += 1\n      }\n      i += 1\n    }\n\n    // Make the tour circular\n    bestGeneration.map(t =&gt; Tour(t.cities, t.path :+ t.path.head))\n}\n</code></pre>\n<p>The <code>fittest</code> method is a simple reduction and only selects the tour smallest path.</p>\n<pre><code class=\"scala\">def fittest(a: Tour, b: Tour): Tour = Seq(a, b).sortBy(_.distance).head\n</code></pre>\n"
+            },
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T16:27:27+0000",
+            "dateFinished": "2016-10-21T16:27:27+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3266",
+            "focus": true
+        },
+        {
+            "text": "object Solver extends Serializable {\n  import scala.util.Random\n  val RANDOM = new Random()\n\n  /**\n   * The main method used to run a solving session.\n   * This can be used in the `.map` function in an RDD to perform the calculations.\n   *\n   * @return this object.\n   */\n  def evolve(tours: Seq[Tour], maxGenerations: Int, maxSimilarity: Double, elitism: Double, mutationRate: Double): Seq[Tour] = {\n    require(maxGenerations > 0, s\"maxGenerations ($maxGenerations) must be greater than 0\")\n    require(maxSimilarity >= 0 && maxSimilarity <= 1, s\"maxSimilarity ($maxSimilarity) must be between 0 and 1\")\n    require(elitism >= 0 && elitism <= 1, s\"elitism ($elitism) must be between 0 and 1\")\n    require(mutationRate >= 0 && mutationRate <= 1, s\"mutationRate ($mutationRate) must be between 0 and 1\")\n\n    var currGeneration = tours\n    var bestGeneration = currGeneration\n    var (i, noImprovement) = (1, 0)\n    while (i < maxGenerations && noImprovement < 2) {\n      // Save the best of the last generation\n      val elites = currGeneration.take(Math.round(elitism * currGeneration.size).toInt)\n      \n      // Create new children and mutate the gene pool\n      val children = currGeneration.takeRight(currGeneration.size - elites.size)\n                        .map(tour => cross(tour, currGeneration, maxSimilarity))\n                        .map(t =>if (mutationRate == 1.0 || RANDOM.nextDouble() < mutationRate) mutate(t) else t)\n\n      currGeneration = (elites ++ children).sortBy(_.distance)\n      \n      if (currGeneration.head.distance < bestGeneration.head.distance) {\n        bestGeneration = currGeneration\n      } else {\n        noImprovement += 1\n      }\n      i += 1\n    }\n    bestGeneration.map(t => Tour(t.cities, t.path :+ t.path.head))\n  }\n\n  /**\n   * Return the fittest tour\n   *\n   * Used as a `reduce` method\n   */\n  def fittest(a: Tour, b: Tour): Tour = Seq(a, b).sortBy(_.distance).head\n\n  /**\n   * Crosses two tours, to create a new one\n   * \n   * Uses a Greedy Crossover pattern picking parents nearest neighbours\n   */\n  private def cross(x: Tour, tours: Seq[Tour], maxSimilarity: Double): Tour = {\n    val cities = x.cities\n    val pathSize = x.path.size\n    \n    // Find a suitable partner to crossover within the maxSimilarity bounds\n    val tourPairs = x.path.zip(x.path.tail)\n    val y = tours.collectFirst({\n      case t if tourPairs.intersect(t.path.zip(t.path.tail)).size.toDouble / pathSize < maxSimilarity => t\n    }).getOrElse(tours(RANDOM.nextInt(tours.size)))\n    \n    // Create a Map which contains each path point as the key and the neighbouring points as the value\n    val tourX = x.path.sliding(3).map(l => (l(1), (l.head, l(2)))).toMap\n    val tourY = y.path.sliding(3).map(l => (l(1), (l.head, l(2)))).toMap\n\n    // Pick a random start position\n    var currentPos = x.path(RANDOM.nextInt(pathSize - 1))\n    val nextGenerationPath = scala.collection.mutable.ListBuffer[Int]() += currentPos\n    var citiesAvailable = x.path.filter(i => i != currentPos)\n    \n    while(citiesAvailable.nonEmpty) {\n      val currentCity = cities(currentPos)\n      val xCity = pickNearestTo(currentCity, pickNeighbours(citiesAvailable, tourX.get(currentPos)), cities)\n      val yCity = pickNearestTo(currentCity, pickNeighbours(citiesAvailable, tourY.get(currentPos)), cities)\n      currentPos = pickNearestTo(currentCity, (xCity, yCity), cities)\n      nextGenerationPath += currentPos\n      citiesAvailable = citiesAvailable.filter(i => i != currentPos)\n    }\n    Tour(cities, nextGenerationPath)\n  }\n\n  /**\n   * Mutates the tour via 2opt\n   */\n  private def mutate(tour: Tour): Tour = {\n    var optimizedPath = tour.path\n    val pathSize = optimizedPath.size\n    for (i <- 2 until pathSize - 1) {\n      for (k <- i + 1 until pathSize) {\n        // 1. take route[0] until route[i]\n        val firstPart = optimizedPath.take(i)\n        // 2. take route[i] until route[k] and reverse\n        val secondPart = optimizedPath.slice(i, k)\n        // 3. take route[k] to end\n        val thirdPart = optimizedPath.slice(k, pathSize)\n\n        val a = tour.cities(firstPart.last)\n        val b = tour.cities(secondPart.last)\n        val c = tour.cities(firstPart.head)\n        val d = tour.cities(secondPart.head)\n\n        val ori = Seq((a, b), (c, d)).map(c => c._1.distanceTo(c._2))\n        val switched = Seq((a, c), (b, d)).map(c => c._1.distanceTo(c._2))\n        if (switched.head < ori.head || switched.last < ori.last) {\n          optimizedPath = firstPart ++ secondPart ++ thirdPart\n        }\n      }\n    }\n    Tour(tour.cities, optimizedPath)\n  }\n\n  private def pickNeighbours(citiesAvailable: Seq[Int], neighbours: Option[(Int, Int)]): (Int, Int) = {\n    val alternative = citiesAvailable(RANDOM.nextInt(citiesAvailable.size))\n    neighbours match {\n      case Some(n) =>\n        val first = if (citiesAvailable.contains(n._1)) n._1 else alternative\n        val second = if (citiesAvailable.contains(n._2)) n._2 else alternative\n        (first, second)\n      case None => (alternative, alternative)\n    }\n  }\n\n  private def pickNearestTo(city: City, choices: (Int, Int), cities: Seq[City]): Int = {\n    val distA = city.distanceTo(cities(choices._1))\n    val distB = city.distanceTo(cities(choices._2))\n    if (distA < distB) choices._1 else choices._2\n  }\n\n}",
+            "dateUpdated": "2016-10-21T15:19:58+0000",
+            "config": {
+                "tableHide": true,
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorHide": false,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173571_1270822787",
+            "id": "20161018-133609_1492261173",
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T15:19:58+0000",
+            "dateFinished": "2016-10-21T15:19:59+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3267",
+            "errorMessage": ""
+        },
+        {
+            "text": "%md\n## Spark and MongoDB combine to find the shortest route\n\nFirst we load the data from MongoDB into a `Dataset[City]`.\n```scala\n// Load the data from MongoDB\nval cities =  spark.read.options(readConfig.asOptions).format(\"com.mongodb.spark.sql\").load().as[City].limit(NUMBER_OF_CITIES_TO_VISIT).collect().toSeq\n```\n\nThen in Spark create `n` partitions containing a `Seq[Tour]` and each tour should be different containing a random path through the cities. Then the tours are evolved over a number of generations and flattened. Finally, the reduce method produces a single winner with the shortest route.\n\n```scala\nval route = sc.parallelize((1 to PARTITIONS).map(i => (1 to POPULATION_SIZE).map( i => Tour(cities))), PARTITIONS)\n  .flatMap(tour => Solver.evolve(tour, MAX_GENERATION, MAX_SIMILARITY, ELITISM, MUTATION_RATE))\n  .reduce((a: Tour, b: Tour) => Solver.fittest(a, b))\n```\n\n### Configuration options",
+            "dateUpdated": "2016-10-21T16:27:54+0000",
+            "config": {
+                "tableHide": false,
+                "colWidth": 12,
+                "editorMode": "ace/mode/markdown",
+                "editorHide": true,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173572_1268899042",
+            "id": "20161017-162718_1426519657",
+            "result": {
+                "code": "SUCCESS",
+                "type": "HTML",
+                "msg": "<h2>Spark and MongoDB combine to find the shortest route</h2>\n<p>First we load the data from MongoDB into a <code>Dataset[City]</code>.</p>\n<pre><code class=\"scala\">// Load the data from MongoDB\nval cities =  spark.read.options(readConfig.asOptions).format(\"com.mongodb.spark.sql\").load().as[City].limit(NUMBER_OF_CITIES_TO_VISIT).collect().toSeq\n</code></pre>\n<p>Then in Spark create <code>n</code> partitions containing a <code>Seq[Tour]</code> and each tour should be different containing a random path through the cities. Then the tours are evolved over a number of generations and flattened. Finally, the reduce method produces a single winner with the shortest route.</p>\n<pre><code class=\"scala\">val route = sc.parallelize((1 to PARTITIONS).map(i =&gt; (1 to POPULATION_SIZE).map( i =&gt; Tour(cities))), PARTITIONS)\n  .flatMap(tour =&gt; Solver.evolve(tour, MAX_GENERATION, MAX_SIMILARITY, ELITISM, MUTATION_RATE))\n  .reduce((a: Tour, b: Tour) =&gt; Solver.fittest(a, b))\n</code></pre>\n<h3>Configuration options</h3>\n"
+            },
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T16:27:53+0000",
+            "dateFinished": "2016-10-21T16:27:53+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3268",
+            "focus": true
+        },
+        {
+            "text": "// Uses toInt and scale set previously in the loading the data paragraph\n// Number of cities to visit\nval NUMBER_OF_CITIES_TO_VISIT = toInt(z.input(\"Number of cities to visit\", 50))\n// Number of partitions\nval PARTITIONS = toInt(z.input(\"Number of partitions\", 4))\n// Size of the population of tours\nval POPULATION_SIZE = toInt(z.input(\"Population size\", 150))\n// The maximum number of generations\nval MAX_GENERATION =  toInt(z.input(\"Max generation\", 50))\n// The max similarity between tours for crossover\nval MAX_SIMILARITY = toInt(z.select(\"Max similarity %\", \"70\", scale))/100.0\n// The max similarity between tours for crossover\nval MUTATION_RATE = toInt(z.select(\"Mutation rate %\", \"50\", scale))/100.0\n// The number of the previous generation to potentially keep\nval ELITISM =  toInt(z.select(\"Elitism %\", \"10\", scale))/100.0\n",
+            "dateUpdated": "2016-10-21T16:27:49+0000",
+            "config": {
+                "tableHide": false,
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorHide": true,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {
+                    "Number of cities to visit": "50",
+                    "Number of partitions": "8",
+                    "Population size": "150",
+                    "Max generation": "50",
+                    "Max similarity": 0.7,
+                    "Elitism": "10",
+                    "Max similarity %": "70",
+                    "Elitism %": "10",
+                    "Mutation rate %": "30"
+                },
+                "forms": {
+                    "Number of cities to visit": {
+                        "name": "Number of cities to visit",
+                        "displayName": "Number of cities to visit",
+                        "type": "input",
+                        "defaultValue": 50,
+                        "hidden": false
+                    },
+                    "Number of partitions": {
+                        "name": "Number of partitions",
+                        "displayName": "Number of partitions",
+                        "type": "input",
+                        "defaultValue": 4,
+                        "hidden": false
+                    },
+                    "Population size": {
+                        "name": "Population size",
+                        "displayName": "Population size",
+                        "type": "input",
+                        "defaultValue": 150,
+                        "hidden": false
+                    },
+                    "Max generation": {
+                        "name": "Max generation",
+                        "displayName": "Max generation",
+                        "type": "input",
+                        "defaultValue": 50,
+                        "hidden": false
+                    },
+                    "Max similarity %": {
+                        "name": "Max similarity %",
+                        "displayName": "Max similarity %",
+                        "type": "select",
+                        "defaultValue": "70",
+                        "options": [
+                            {
+                                "value": "10",
+                                "displayName": "10",
+                                "$$hashKey": "object:4832"
+                            },
+                            {
+                                "value": "20",
+                                "displayName": "20",
+                                "$$hashKey": "object:4833"
+                            },
+                            {
+                                "value": "30",
+                                "displayName": "30",
+                                "$$hashKey": "object:4834"
+                            },
+                            {
+                                "value": "40",
+                                "displayName": "40",
+                                "$$hashKey": "object:4835"
+                            },
+                            {
+                                "value": "50",
+                                "displayName": "50",
+                                "$$hashKey": "object:4836"
+                            },
+                            {
+                                "value": "60",
+                                "displayName": "60",
+                                "$$hashKey": "object:4837"
+                            },
+                            {
+                                "value": "70",
+                                "displayName": "70",
+                                "$$hashKey": "object:4838"
+                            },
+                            {
+                                "value": "80",
+                                "displayName": "80",
+                                "$$hashKey": "object:4839"
+                            },
+                            {
+                                "value": "90",
+                                "displayName": "90",
+                                "$$hashKey": "object:4840"
+                            },
+                            {
+                                "value": "100",
+                                "displayName": "100",
+                                "$$hashKey": "object:4841"
+                            }
+                        ],
+                        "hidden": false
+                    },
+                    "Mutation rate %": {
+                        "name": "Mutation rate %",
+                        "displayName": "Mutation rate %",
+                        "type": "select",
+                        "defaultValue": "50",
+                        "options": [
+                            {
+                                "value": "10",
+                                "displayName": "10",
+                                "$$hashKey": "object:4842"
+                            },
+                            {
+                                "value": "20",
+                                "displayName": "20",
+                                "$$hashKey": "object:4843"
+                            },
+                            {
+                                "value": "30",
+                                "displayName": "30",
+                                "$$hashKey": "object:4844"
+                            },
+                            {
+                                "value": "40",
+                                "displayName": "40",
+                                "$$hashKey": "object:4845"
+                            },
+                            {
+                                "value": "50",
+                                "displayName": "50",
+                                "$$hashKey": "object:4846"
+                            },
+                            {
+                                "value": "60",
+                                "displayName": "60",
+                                "$$hashKey": "object:4847"
+                            },
+                            {
+                                "value": "70",
+                                "displayName": "70",
+                                "$$hashKey": "object:4848"
+                            },
+                            {
+                                "value": "80",
+                                "displayName": "80",
+                                "$$hashKey": "object:4849"
+                            },
+                            {
+                                "value": "90",
+                                "displayName": "90",
+                                "$$hashKey": "object:4850"
+                            },
+                            {
+                                "value": "100",
+                                "displayName": "100",
+                                "$$hashKey": "object:4851"
+                            }
+                        ],
+                        "hidden": false
+                    },
+                    "Elitism %": {
+                        "name": "Elitism %",
+                        "displayName": "Elitism %",
+                        "type": "select",
+                        "defaultValue": "10",
+                        "options": [
+                            {
+                                "value": "10",
+                                "displayName": "10",
+                                "$$hashKey": "object:4852"
+                            },
+                            {
+                                "value": "20",
+                                "displayName": "20",
+                                "$$hashKey": "object:4853"
+                            },
+                            {
+                                "value": "30",
+                                "displayName": "30",
+                                "$$hashKey": "object:4854"
+                            },
+                            {
+                                "value": "40",
+                                "displayName": "40",
+                                "$$hashKey": "object:4855"
+                            },
+                            {
+                                "value": "50",
+                                "displayName": "50",
+                                "$$hashKey": "object:4856"
+                            },
+                            {
+                                "value": "60",
+                                "displayName": "60",
+                                "$$hashKey": "object:4857"
+                            },
+                            {
+                                "value": "70",
+                                "displayName": "70",
+                                "$$hashKey": "object:4858"
+                            },
+                            {
+                                "value": "80",
+                                "displayName": "80",
+                                "$$hashKey": "object:4859"
+                            },
+                            {
+                                "value": "90",
+                                "displayName": "90",
+                                "$$hashKey": "object:4860"
+                            },
+                            {
+                                "value": "100",
+                                "displayName": "100",
+                                "$$hashKey": "object:4861"
+                            }
+                        ],
+                        "hidden": false
+                    }
+                }
+            },
+            "jobName": "paragraph_1476890173572_1268899042",
+            "id": "20161017-181431_476251972",
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T16:17:54+0000",
+            "dateFinished": "2016-10-21T16:17:55+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3269",
+            "errorMessage": "",
+            "focus": true
+        },
+        {
+            "text": "// Load the data from MongoDB\nval cities =  spark.read.options(readConfig.asOptions).format(\"com.mongodb.spark.sql\").load().as[City].limit(NUMBER_OF_CITIES_TO_VISIT).collect().toSeq\n\n// \nval (route, duration) = timed({\n    sc.parallelize((1 to PARTITIONS).map(i => (1 to POPULATION_SIZE).map( i => Tour(cities))), PARTITIONS)\n  .flatMap(tour => Solver.evolve(tour, MAX_GENERATION, MAX_SIMILARITY, ELITISM, MUTATION_RATE))\n  .reduce((a: Tour, b: Tour) => Solver.fittest(a, b))\n})",
+            "dateUpdated": "2016-10-21T15:20:08+0000",
+            "config": {
+                "colWidth": 12,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true,
+                "editorMode": "ace/mode/scala",
+                "editorHide": false,
+                "tableHide": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1477045885230_-276180757",
+            "id": "20161021-103125_637179061",
+            "dateCreated": "2016-10-21T10:31:25+0000",
+            "dateStarted": "2016-10-21T15:20:08+0000",
+            "dateFinished": "2016-10-21T15:20:18+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3270",
+            "errorMessage": ""
+        },
+        {
+            "text": "val stats = RouteStats(NUMBER_OF_CITIES_TO_VISIT, PARTITIONS, POPULATION_SIZE, MAX_GENERATION, MAX_SIMILARITY, ELITISM, duration.toSeconds, route.distance.toInt)\nruns += stats\nz.angularBind(\"mapRoutePoints\", route.path.map(route.cities(_)).toArray)\nz.angularBind(\"latestRun\", stats)",
+            "dateUpdated": "2016-10-21T16:27:59+0000",
+            "config": {
+                "colWidth": 12,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true,
+                "editorMode": "ace/mode/scala",
+                "editorHide": true,
+                "tableHide": true
+            },
+            "settings": {
+                "params": {
+                    "NUMBER_OF_CITIES_TO_VISIT": "",
+                    "duration.toCoarsest": ""
+                },
+                "forms": {}
+            },
+            "jobName": "paragraph_1477048238223_119127097",
+            "id": "20161021-111038_1854460399",
+            "dateCreated": "2016-10-21T11:10:38+0000",
+            "dateStarted": "2016-10-21T15:20:12+0000",
+            "dateFinished": "2016-10-21T15:20:19+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3271",
+            "errorMessage": ""
+        },
+        {
+            "text": "%angular\n<!-- place this in an %angular paragraph -->\n<style>\n#mapRoute svg {\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  /* Trying to get SVG to act like a greedy block in all browsers */\n  display: block;\n\n  /* Remove these: */\n  width: auto !important;\n  height: auto !important;\n}\n</style>\n\n<div id=\"mapRoute\" style=\"height: 800px\"></div>\n<div id=\"latestRun\">Latest Run took: {{seconds}} Seconds </div>\n<script type=\"text/javascript\">\nfunction initMapRoute() {\n    var map = L.map('mapRoute', { zoomControl:false, scrollWheelZoom: false, dragging: false }).setView([49.83798, 9.84375], 4);\n    var Esri_WorldStreetMap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {\n  \t    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'\n    });\n    Esri_WorldStreetMap.addTo(map);\n    \n    var header = angular.element($('#latestRun').parent('.ng-scope'));\n    var el = angular.element($('#mapRoute').parent('.ng-scope'));\n    var geoMarkers = L.layerGroup().addTo(map);\n    var polylineLayer = L.layerGroup().addTo(map);\n    angular.element(el).ready(function() {\n        window.locationWatcherRoutes = el.scope().compiledScope.$watch('mapRoutePoints', function(newValue, oldValue) {\n            geoMarkers.clearLayers(); // -- if you want to only show new data clear the layer first\n            polylineLayer.clearLayers();\n            var points = []\n            angular.forEach(newValue, function(seat) {\n                var marker = L.marker([seat.lat, seat.lon])\n                  .bindPopup(seat.name)\n                  .addTo(geoMarkers);\n                this.push([seat.lat,seat.lon]);\n            }, points);\n            var polyline = L.polyline(points, { color: 'blue', weight: 4 });\n            polylineLayer.addLayer(polyline);\n            polyline.bringToFront();\n        })\n        \n        var headerScope = header.scope().compiledScope;\n        headerScope.$watch('latestRun', function(newValue, oldValue) {\n            headerScope.cities = newValue.cities;\n            headerScope.partitions = newValue.partitions;\n            headerScope.maxGeneration = newValue.maxGeneration;\n            headerScope.maxSimilarity = newValue.maxSimilarity;\n            headerScope.elitism = newValue.elitism;\n            headerScope.seconds = newValue.seconds;\n            console.log(headerScope)\n        })\n    });\n}\n\nif (window.locationWatcherRoutes) {\n    // clear existing watcher otherwise we'll have duplicates\n    window.locationWatcherRoutes();\n}\n\n// ensure we only load the script once, seems to cause issues otherwise\nif (window.L) {\n  initMapRoute();  \n}\n</script>",
+            "dateUpdated": "2016-10-21T16:28:03+0000",
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorHide": true,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173573_1268514293",
+            "id": "20161017-181813_1699363872",
+            "result": {
+                "code": "SUCCESS",
+                "type": "ANGULAR",
+                "msg": "<!-- place this in an %angular paragraph -->\n<style>\n#mapRoute svg {\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  /* Trying to get SVG to act like a greedy block in all browsers */\n  display: block;\n\n  /* Remove these: */\n  width: auto !important;\n  height: auto !important;\n}\n</style>\n\n<div id=\"mapRoute\" style=\"height: 800px\"></div>\n<div id=\"latestRun\">Latest Run took: {{seconds}} Seconds </div>\n<script type=\"text/javascript\">\nfunction initMapRoute() {\n    var map = L.map('mapRoute', { zoomControl:false, scrollWheelZoom: false, dragging: false }).setView([49.83798, 9.84375], 4);\n    var Esri_WorldStreetMap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {\n  \t    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'\n    });\n    Esri_WorldStreetMap.addTo(map);\n    \n    var header = angular.element($('#latestRun').parent('.ng-scope'));\n    var el = angular.element($('#mapRoute').parent('.ng-scope'));\n    var geoMarkers = L.layerGroup().addTo(map);\n    var polylineLayer = L.layerGroup().addTo(map);\n    angular.element(el).ready(function() {\n        window.locationWatcherRoutes = el.scope().compiledScope.$watch('mapRoutePoints', function(newValue, oldValue) {\n            geoMarkers.clearLayers(); // -- if you want to only show new data clear the layer first\n            polylineLayer.clearLayers();\n            var points = []\n            angular.forEach(newValue, function(seat) {\n                var marker = L.marker([seat.lat, seat.lon])\n                  .bindPopup(seat.name)\n                  .addTo(geoMarkers);\n                this.push([seat.lat,seat.lon]);\n            }, points);\n            var polyline = L.polyline(points, { color: 'blue', weight: 4 });\n            polylineLayer.addLayer(polyline);\n            polyline.bringToFront();\n        })\n        \n        var headerScope = header.scope().compiledScope;\n        headerScope.$watch('latestRun', function(newValue, oldValue) {\n            headerScope.cities = newValue.cities;\n            headerScope.partitions = newValue.partitions;\n            headerScope.maxGeneration = newValue.maxGeneration;\n            headerScope.maxSimilarity = newValue.maxSimilarity;\n            headerScope.elitism = newValue.elitism;\n            headerScope.seconds = newValue.seconds;\n            console.log(headerScope)\n        })\n    });\n}\n\nif (window.locationWatcherRoutes) {\n    // clear existing watcher otherwise we'll have duplicates\n    window.locationWatcherRoutes();\n}\n\n// ensure we only load the script once, seems to cause issues otherwise\nif (window.L) {\n  initMapRoute();  \n}\n</script>"
+            },
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T16:28:02+0000",
+            "dateFinished": "2016-10-21T16:28:02+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3272",
+            "focus": true
+        },
+        {
+            "text": "println(\"%table\\ncities\\tdistance\\tseconds\")\nruns.foreach {case (stats) => println(s\"${stats.cities}\\t${stats.distance}\\t${stats.seconds}\")}",
+            "dateUpdated": "2016-10-21T16:28:10+0000",
+            "config": {
+                "tableHide": false,
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorHide": true,
+                "graph": {
+                    "mode": "scatterChart",
+                    "height": 474,
+                    "optionOpen": true,
+                    "keys": [
+                        {
+                            "name": "distance",
+                            "index": 1,
+                            "aggr": "sum"
+                        }
+                    ],
+                    "values": [
+                        {
+                            "name": "seconds",
+                            "index": 2,
+                            "aggr": "sum"
+                        }
+                    ],
+                    "groups": [
+                        {
+                            "name": "cities",
+                            "index": 0,
+                            "aggr": "sum"
+                        }
+                    ],
+                    "scatter": {
+                        "yAxis": {
+                            "name": "cities",
+                            "index": 0,
+                            "aggr": "sum"
+                        },
+                        "xAxis": {
+                            "name": "seconds",
+                            "index": 2,
+                            "aggr": "sum"
+                        },
+                        "size": {
+                            "name": "distance",
+                            "index": 1,
+                            "aggr": "sum"
+                        }
+                    }
+                },
+                "enabled": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173573_1268514293",
+            "id": "20161017-191938_712314624",
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T15:19:24+0000",
+            "dateFinished": "2016-10-21T15:19:24+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3273",
+            "errorMessage": ""
+        },
+        {
+            "text": "%md\n### Further reading:\n\n  * A shortest-possible walking tour through the pubs of the United Kingdom. [http://www.math.uwaterloo.ca/tsp/pubs/](http://www.math.uwaterloo.ca/tsp/pubs/)\n  * Running a Genetic Algorithm on Apache Spark [http://www.niels.nu/blog/2016/spark-of-life-genetic-algorithm.html](http://www.niels.nu/blog/2016/spark-of-life-genetic-algorithm.html)\n  * Applying a genetic algorithm to the traveling salesman problem [http://www.theprojectspot.com/tutorial-post/applying-a-genetic-algorithm-to-the-travelling-salesman-problem/5](http://www.theprojectspot.com/tutorial-post/applying-a-genetic-algorithm-to-the-travelling-salesman-problem/5)\n  * Genetic Algorithms [http://www.obitko.com/tutorials/genetic-algorithms/index.php](http://www.obitko.com/tutorials/genetic-algorithms/index.php)\n  * Developing Improved Greedy Crossover to Solve Symmetric Traveling Salesman Problem [https://arxiv.org/pdf/1209.5339.pdf](https://arxiv.org/pdf/1209.5339.pdf)\n  * Parallel Genetic Algorithm to Solve Traveling Salesman Problem on MapReduce Framework: [https://arxiv.org/pdf/1401.6267.pdf]([https://arxiv.org/pdf/1401.6267.pdf)\n  * Comparison of TSP Algorithms [http://bardzo.be/4sem/NAI/rozne/Comparison%20of%20TSP%20Algorithms/Comparison%20of%20TSP%20Algorithms.PDF](http://bardzo.be/4sem/NAI/rozne/Comparison%20of%20TSP%20Algorithms/Comparison%20of%20TSP%20Algorithms.PDF)",
+            "dateUpdated": "2016-10-21T16:28:14+0000",
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/markdown",
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true,
+                "editorHide": true
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476890173574_1269668540",
+            "id": "20161018-092403_1613465573",
+            "result": {
+                "code": "SUCCESS",
+                "type": "HTML",
+                "msg": "<h3>Further reading:</h3>\n<ul>\n<li>A shortest-possible walking tour through the pubs of the United Kingdom. <a href=\"http://www.math.uwaterloo.ca/tsp/pubs/\">http://www.math.uwaterloo.ca/tsp/pubs/</a></li>\n<li>Running a Genetic Algorithm on Apache Spark <a href=\"http://www.niels.nu/blog/2016/spark-of-life-genetic-algorithm.html\">http://www.niels.nu/blog/2016/spark-of-life-genetic-algorithm.html</a></li>\n<li>Applying a genetic algorithm to the traveling salesman problem <a href=\"http://www.theprojectspot.com/tutorial-post/applying-a-genetic-algorithm-to-the-travelling-salesman-problem/5\">http://www.theprojectspot.com/tutorial-post/applying-a-genetic-algorithm-to-the-travelling-salesman-problem/5</a></li>\n<li>Genetic Algorithms <a href=\"http://www.obitko.com/tutorials/genetic-algorithms/index.php\">http://www.obitko.com/tutorials/genetic-algorithms/index.php</a></li>\n<li>Developing Improved Greedy Crossover to Solve Symmetric Traveling Salesman Problem <a href=\"https://arxiv.org/pdf/1209.5339.pdf\">https://arxiv.org/pdf/1209.5339.pdf</a></li>\n<li>Parallel Genetic Algorithm to Solve Traveling Salesman Problem on MapReduce Framework: <a href=\"[https://arxiv.org/pdf/1401.6267.pdf\">https://arxiv.org/pdf/1401.6267.pdf</a></li>\n<li>Comparison of TSP Algorithms <a href=\"http://bardzo.be/4sem/NAI/rozne/Comparison%20of%20TSP%20Algorithms/Comparison%20of%20TSP%20Algorithms.PDF\">http://bardzo.be/4sem/NAI/rozne/Comparison%20of%20TSP%20Algorithms/Comparison%20of%20TSP%20Algorithms.PDF</a></li>\n</ul>\n"
+            },
+            "dateCreated": "2016-10-19T15:16:13+0000",
+            "dateStarted": "2016-10-21T16:28:13+0000",
+            "dateFinished": "2016-10-21T16:28:13+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3274",
+            "focus": true
+        },
+        {
+            "text": "",
+            "dateUpdated": "2016-10-21T16:28:22+0000",
+            "config": {
+                "colWidth": 12,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true,
+                "editorMode": "ace/mode/scala",
+                "editorHide": false,
+                "tableHide": false
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1476894362517_1974888606",
+            "id": "20161019-162602_1980553056",
+            "dateCreated": "2016-10-19T16:26:02+0000",
+            "dateStarted": "2016-10-21T15:19:24+0000",
+            "dateFinished": "2016-10-21T15:19:24+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:3275",
+            "errorMessage": ""
+        }
+    ],
+    "name": "3. European Grand Tour",
+    "id": "2BYG1NETG",
+    "angularObjects": {
+        "2BXSWGKC1:shared_process": [],
+        "2BXQ5VXAG:shared_process": [],
+        "2BYW2D4SZ:shared_process": [],
+        "2BXSBBYPF:shared_process": [],
+        "2BYBU9MSP:shared_process": [],
+        "2BXXKAQXM:shared_process": [],
+        "2C12D7CYC:shared_process": [],
+        "2BYX42RF8:shared_process": [],
+        "2C1AKJA61:shared_process": [],
+        "2C19EFBHC:shared_process": [],
+        "2C1H96DRD:shared_process": [],
+        "2C16DPS8S:shared_process": [],
+        "2C2D23BXQ:shared_process": [],
+        "2C2HHW9NW:shared_process": [],
+        "2C2E7E3KQ:shared_process": [],
+        "2BZ74SQQH:shared_process": [],
+        "2BZ4Q3BRK:shared_process": [],
+        "2BYJG11CW:shared_process": []
+    },
+    "config": {
+        "looknfeel": "default"
+    },
+    "info": {}
+}
