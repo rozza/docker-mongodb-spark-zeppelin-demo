@@ -29,5 +29,6 @@ RUN mvn -Pscala-2.11 -Pspark-2.0 -Phadoop-2.6 -Pyarn -Ppyspark -Psparkr -Pscala-
 RUN rm -rf notebook
 COPY files/notebook notebook
 COPY files/data data
+COPY files/img zeppelin-web/dist/assets/images
 
 CMD "bin/zeppelin.sh"
