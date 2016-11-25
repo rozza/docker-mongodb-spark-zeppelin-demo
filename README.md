@@ -8,12 +8,11 @@ An example of using docker-compose to set up a single [Apache Spark](http://spar
 
 To get running :
 
- 1. `docker-compose up -d`
+ 1. `docker-compose up --build -d`
     In the background the MongoDB instance will be running in one container and Apache Zeppelin and Spark on another.
  2. Goto: [localhost:8080](http://localhost:8080) to load the Zeppelin
- 3. Add the MongoDB Spark Connector to the Spark interpreter: `org.mongodb.spark:mongo-spark-connector_2.11:2.0.0-rc0`
+ 3. Add the MongoDB Spark Connector to the Spark interpreter: `org.mongodb.spark:mongo-spark-connector_2.11:2.0.0`
  4. Look at an existing notebook or create your own.
-
 
 ### Todos
 
