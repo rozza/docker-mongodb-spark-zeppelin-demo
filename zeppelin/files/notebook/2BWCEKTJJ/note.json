@@ -1,6 +1,43 @@
 ﻿{
     "paragraphs": [
         {
+            "text": "%md \n## Setup\n\n 1. First configure the Interpreters.\n 2. Add the MongoDB Spark Connector to the Spark Interpreter `org.mongodb.spark:mongo-spark-connector_2.11:2.0.0`\n 3. Profit!",
+            "dateUpdated": "2016-11-10T15:53:10+0000",
+            "config": {
+                "colWidth": 12,
+                "graph": {
+                    "mode": "table",
+                    "height": 300,
+                    "optionOpen": false,
+                    "keys": [],
+                    "values": [],
+                    "groups": [],
+                    "scatter": {}
+                },
+                "enabled": true,
+                "editorMode": "ace/mode/markdown",
+                "editorHide": true,
+                "tableHide": false
+            },
+            "settings": {
+                "params": {},
+                "forms": {}
+            },
+            "jobName": "paragraph_1477041252084_-1575899171",
+            "id": "20161021-091412_1850124205",
+            "result": {
+                "code": "SUCCESS",
+                "type": "HTML",
+                "msg": "<h2>Setup</h2>\n<ol>\n<li>First configure the Interpreters.</li>\n<li>Add the MongoDB Spark Connector to the Spark Interpreter <code>org.mongodb.spark:mongo-spark-connector_2.11:2.0.0</code></li>\n<li>Profit!</li>\n</ol>\n"
+            },
+            "dateCreated": "2016-10-21T09:14:12+0000",
+            "dateStarted": "2016-11-10T15:53:10+0000",
+            "dateFinished": "2016-11-10T15:53:10+0000",
+            "status": "FINISHED",
+            "progressUpdateIntervalMs": 500,
+            "$$hashKey": "object:5281"
+        },
+        {
             "text": "%md\n### Welcome to the MongoDB Spark Connector\n##### This is a live tutorial, you can run the code yourself. (Shift-Enter to Run)",
             "dateUpdated": "2016-09-07T16:45:39+0000",
             "config": {
